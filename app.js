@@ -11,12 +11,11 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
 
 app.use(bodyParser.json());
 
-const productRoute = require("./routes/products");
-app.use("/products", productRoute);
+const goldRoute = require("./routes/guld");
+app.use("/guld", goldRoute);
 
-app.get("/", (req, res) => {
-  res.send("We are HOME!");
-});
+const silverRoute = require("./routes/silver");
+app.use("/silver", silverRoute);
 
 app.listen(port, () => {
   console.log(`App running on http://localhost:${port}`);
