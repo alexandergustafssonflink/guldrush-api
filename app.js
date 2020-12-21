@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+let port = process.env.PORT || 3000;
 
 const bodyParser = require("body-parser");
 require("dotenv/config");
@@ -17,4 +18,6 @@ app.get("/", (req, res) => {
   res.send("We are HOME!");
 });
 
-app.listen(3000);
+app.listen(port, () => {
+  console.log(`App running on http://localhost:${port}`);
+});
