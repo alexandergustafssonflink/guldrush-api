@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+var cors = require("cors");
+
 let port = process.env.PORT || 3000;
 
 const bodyParser = require("body-parser");
@@ -9,6 +11,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
   console.log("Connected to DB");
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 
 const goldRoute = require("./routes/guld");

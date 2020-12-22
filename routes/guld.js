@@ -2,36 +2,36 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 
-// SUBMITS PRODUCT
-router.post("/", async (req, res) => {
-  const product = new Product({
-    price: req.body.price,
-    name: req.body.name,
-    collection: "guldrush",
-  });
-  try {
-    const savedProduct = await product.save();
-    res.json(savedProduct);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
+// // SUBMITS PRODUCT
+// router.post("/", async (req, res) => {
+//   const product = new Product({
+//     price: req.body.price,
+//     name: req.body.name,
+//     collection: "guldrush",
+//   });
+//   try {
+//     const savedProduct = await product.save();
+//     res.json(savedProduct);
+//   } catch (err) {
+//     res.json({ message: err });
+//   }
+// });
 
-router.get("/guldtackor", async (req, res) => {
+router.get("/:product", async (req, res) => {
   try {
-    const products = await Product.find({ product: "guldtackor" })
+    const products = await Product.find({ product: req.params.product })
       .sort({ date: -1 })
       .limit(200);
-    res.json(products);
+    res.json({ products });
   } catch (err) {
     res.json(err);
   }
 });
 
-router.get("/guldtackor/:weight", async (req, res) => {
+router.get("/:product/:weight", async (req, res) => {
   try {
     const products = await Product.find({
-      product: "guldtackor",
+      product: req.params.product,
       weight: req.params.weight,
     })
       .sort({ date: -1 })
@@ -42,30 +42,30 @@ router.get("/guldtackor/:weight", async (req, res) => {
   }
 });
 
-router.get("/guldmynt", async (req, res) => {
-  try {
-    const products = await Product.find({ product: "guldmynt" })
-      .sort({ date: -1 })
-      .limit(200);
-    res.json(products);
-  } catch (err) {
-    res.json(err);
-  }
-});
+// router.get("/guldmynt", async (req, res) => {
+//   try {
+//     const products = await Product.find({ product: "guldmynt" })
+//       .sort({ date: -1 })
+//       .limit(200);
+//     res.json(products);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
 
-router.get("/guldmynt/:weight", async (req, res) => {
-  try {
-    const products = await Product.find({
-      product: "guldmynt",
-      weight: req.params.weight,
-    })
-      .sort({ date: -1 })
-      .limit(200);
-    res.json(products);
-  } catch (err) {
-    res.json(err);
-  }
-});
+// router.get("/guldmynt/:weight", async (req, res) => {
+//   try {
+//     const products = await Product.find({
+//       product: "guldmynt",
+//       weight: req.params.weight,
+//     })
+//       .sort({ date: -1 })
+//       .limit(200);
+//     res.json(products);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
 
 //GETS ALL PRODUCTS
 // router.get("/", async (req, res) => {

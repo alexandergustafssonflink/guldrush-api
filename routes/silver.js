@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/silvertackor", async (req, res) => {
+router.get("/:product", async (req, res) => {
   try {
     const products = await Product.find({ product: "silvertackor" })
       .sort({ date: -1 })
@@ -24,10 +24,10 @@ router.get("/silvertackor", async (req, res) => {
   }
 });
 
-router.get("/silvertackor/:weight", async (req, res) => {
+router.get("/:product/:weight", async (req, res) => {
   try {
     const products = await Product.find({
-      product: "silvertackor",
+      product: req.params.product,
       weight: req.params.weight,
     })
       .sort({ date: -1 })
@@ -38,30 +38,30 @@ router.get("/silvertackor/:weight", async (req, res) => {
   }
 });
 
-router.get("/silvermynt", async (req, res) => {
-  try {
-    const products = await Product.find({ product: "silvermynt" })
-      .sort({ date: -1 })
-      .limit(200);
-    res.json(products);
-  } catch (err) {
-    res.json(err);
-  }
-});
+// router.get("/silvermynt", async (req, res) => {
+//   try {
+//     const products = await Product.find({ product: "silvermynt" })
+//       .sort({ date: -1 })
+//       .limit(200);
+//     res.json(products);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
 
-router.get("/silvermynt/:weight", async (req, res) => {
-  try {
-    const products = await Product.find({
-      product: "silvermynt",
-      weight: req.params.weight,
-    })
-      .sort({ date: -1 })
-      .limit(200);
-    res.json(products);
-  } catch (err) {
-    res.json(err);
-  }
-});
+// router.get("/silvermynt/:weight", async (req, res) => {
+//   try {
+//     const products = await Product.find({
+//       product: "silvermynt",
+//       weight: req.params.weight,
+//     })
+//       .sort({ date: -1 })
+//       .limit(200);
+//     res.json(products);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
 
 // SUBMITS PRODUCT
 // router.post("/", async (req, res) => {
