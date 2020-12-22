@@ -22,7 +22,7 @@ router.get("/:product", async (req, res) => {
     const products = await Product.find({ product: req.params.product })
       .sort({ date: -1 })
       .limit(200);
-    res.json({ products });
+    res.json(products);
   } catch (err) {
     res.json(err);
   }
