@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:product", async (req, res) => {
   try {
-    const products = await Product.find({ product: "silvertackor" })
+    const products = await Product.find({ product: req.params.product })
       .sort({ date: -1 })
       .limit(200);
     res.json(products);
